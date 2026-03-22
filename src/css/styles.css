@@ -47,7 +47,7 @@ input:active {
 button {
     border-radius: 8px;
     padding: 8px 16px;
-    width: 91px;
+    width: auto;
     height: 40px;
     background: #4E75FF;
     font-weight: 500;
@@ -63,6 +63,11 @@ button {
 
 button:hover {
     background-color: #6C8CFF;
+}
+
+.load-more {
+    display: block;
+    margin: 32px auto;
 }
 
 .is-hidden {
@@ -129,7 +134,10 @@ button:hover {
     height: 48px;
     display: inline-block;
     position: relative;
-}
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}    
 
 .loader::after,
 .loader::before {
@@ -160,3 +168,4 @@ button:hover {
         opacity: 0;
     }
 }
+

@@ -78,6 +78,8 @@ async function onSearch(e) {
 }
 
 async function onLoadMore() {
+  hideLoadMoreBtn();
+
   currentPage += 1;
   try {
     showLoader()
@@ -85,7 +87,6 @@ async function onLoadMore() {
     const data = await getImagesByQuery(currentQuery, currentPage);
     
     createGallery(data.hits);
-
     smoothScroll();
 
     const loadedImages = currentPage * 15;
@@ -97,7 +98,9 @@ async function onLoadMore() {
         message: "We're sorry, but you've reached the end of search results.",
         position: 'topRight',
       });
-    } 
+    } else {
+      showLoadMoreBtn();
+    }
   } catch (error) {
     iziToast.error({
       message: "Error loading images",

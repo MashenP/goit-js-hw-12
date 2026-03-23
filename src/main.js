@@ -66,6 +66,8 @@ async function onSearch(e) {
         position: 'topRight',
       });
     }
+
+    form.reset();
   } catch (error) {
     iziToast.error({
       message: "Error loading images",
@@ -73,7 +75,6 @@ async function onSearch(e) {
     });
   } finally {
     hideLoader();
-    form.reset();
   }
 }
 
@@ -85,6 +86,15 @@ async function onLoadMore() {
     showLoader()
 
     const data = await getImagesByQuery(currentQuery, currentPage);
+
+    if (!data.hits || data.hits.length === 0) {
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'topRight',
+      });
+      hideLoadMoreBtn();
+      return;
+    }
     
     createGallery(data.hits);
     smoothScroll();
